@@ -33,15 +33,18 @@ public class Controlador extends HttpServlet{
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title></title>");
-            out.println("");
-            out.println("");
-            out.println("");
-            out.println("");
-            out.println("");
-            out.println("");
+            out.println("<title>Controlador Servlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Controlador Servelt de" + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
             
         }
     }
-    
+    @Override
+    protected  void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        String ingreso="";
+    }
 }
