@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 /**
  *
@@ -46,5 +47,21 @@ public class Controlador extends HttpServlet{
     protected  void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         String ingreso="";
+        String action=request.getParameter("");
+        if(action.equalsIgnoreCase("")){
+            ingreso=mostrar;
+        }else if (action.equalsIgnoreCase("")){
+            ingreso=ingresar;
+        }else if(action.equalsIgnoreCase("")){
+            ingreso=editar;
+        }else if(action.equalsIgnoreCase("")){
+            ingreso=volver;
+        }
+        
+        
+     /*   @Override
+        public String getServletInfo(){
+                return "Descripcion corta";
+            }*/
     }
 }
