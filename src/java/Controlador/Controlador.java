@@ -7,6 +7,8 @@ package Controlador;
 
 
 /*colocar los modelos*/
+import Modelo.Cliente;
+import ModeloDAO.ClienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,7 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 /**
  *
@@ -25,7 +26,8 @@ public class Controlador extends HttpServlet{
     String ingresar="Vistas/mostrar.jsp";
     String editar="Vistas/mostrar.jsp";
     String volver="Vistas/mostrar.jsp";
-    Usuario user=new UsuarioDAO();
+    Cliente cli=new Cliente();
+    ClienteDAO clidao=new ClienteDAO();
     int idusuario;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
@@ -47,21 +49,67 @@ public class Controlador extends HttpServlet{
     protected  void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         String ingreso="";
-        String action=request.getParameter("");
-        if(action.equalsIgnoreCase("")){
+        String action=request.getParameter("accion");
+        if(action.equalsIgnoreCase("listar")){
             ingreso=mostrar;
-        }else if (action.equalsIgnoreCase("")){
+        }else if (action.equalsIgnoreCase("add")){
             ingreso=ingresar;
-        }else if(action.equalsIgnoreCase("")){
+        }else if(action.equalsIgnoreCase("inicio")){
             ingreso=editar;
-        }else if(action.equalsIgnoreCase("")){
+        }else if(action.equalsIgnoreCase("inicio")){
             ingreso=volver;
         }
-        
+        else if(action.equalsIgnoreCase("agregar")){
+            String nombrecli=request.getParameter("txtnombrecli");
+            String apellidocli=request.getParameter("txtapellidocli");
+            String direccioncli=request.getParameter("txtdireccioncli");
+            String telefonocli=request.getParameter("txttelefonocli");
+            cli.setNombrecli(nombrecli);
+            cli.setApecli(apellidocli);
+            cli.setDircli(direccioncli);
+            cli.setTelfcli(telefonocli);
+            clidao.add(cli);
+            ingreso=mostrar;
+        }
+        else if(action.equalsIgnoreCase("editar")){
+            request.setAttribute("idclientes", request.getParameter("idclientes"));
+            ingreso=editar;
+        }
+        else if(action.equalsIgnoreCase("actualizar")){
+            idusuario=Integer.parseInt(request.getParameter("txtindclientes"));
+            String nombrecli=request.getParameter("txtnombrecli");
+            String apellidocli=request.getParameter("txtapellidocli");
+            String direccioncli=request.getParameter("txtdireccioncli");
+            String telefonocli=request.getParameter("txttelefonocli");
+            cli.setIdcli(idusuario);
+            cli.setNombrecli(nombrecli);
+            cli.setApecli(apellidocli);
+            cli.setDircli(direccioncli);
+            cli.setTelfcli(telefonocli);
+            clidao.edit(cli);
+            ingreso=mostrar;
+        }
+        else if(action.equalsIgnoreCase("eliminar")){
+            idusuario=Integer.parseInt(request.getParameter("idclientes"));
+            cli.setIdcli(idusuario);;
+            clidao.eliminar(idusuario);
+            ingreso=mostrar;
+        }
+        RequestDispatcher vista=request.getRequestDispatcher(ingreso);
+        vista.forward(request, response);
         
      /*   @Override
         public String getServletInfo(){
                 return "Descripcion corta";
             }*/
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        processRequest(request, response);
+    }
+    @Override
+    public String getServletInfo(){
+        return "descripcion corta";
     }
 }
