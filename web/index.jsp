@@ -17,7 +17,7 @@
         <table border="0" width="90%" class="bg-danger">
             <thead>
                 <tr>
-                    <th><img src="imagen/uno.jpg"  class="img-responsive img-circle"></th>
+                    <th><img src="imagen/uno.jpg"  class="img-responsive img-circle img-thumbnail"></th>
                     <th colspan="2"><h1>SISTEMA</h1><br>
                         <h1>Bar-Karaoke "The Kwik-E-Mart"</h1></th>                    
                 </tr>
