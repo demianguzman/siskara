@@ -22,10 +22,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author Demian
  */
 public class Controlador extends HttpServlet{
-    String mostrar="Vistas/mostrar.jsp";
-    String ingresar="Vistas/mostrar.jsp";
-    String editar="Vistas/mostrar.jsp";
-    String volver="Vistas/mostrar.jsp";
+    String mostrar="Vistas/listar.jsp";
+    String ingresar="Vistas/add.jsp";
+    String editar="Vistas/edit.jsp";
+    String volver="Vistas/index.jsp";
     Cliente cli=new Cliente();
     ClienteDAO clidao=new ClienteDAO();
     int idusuario;
@@ -54,8 +54,6 @@ public class Controlador extends HttpServlet{
             ingreso=mostrar;
         }else if (action.equalsIgnoreCase("add")){
             ingreso=ingresar;
-        }else if(action.equalsIgnoreCase("inicio")){
-            ingreso=editar;
         }else if(action.equalsIgnoreCase("inicio")){
             ingreso=volver;
         }
